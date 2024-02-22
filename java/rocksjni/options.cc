@@ -220,6 +220,13 @@ void Java_org_rocksdb_Options_setMergeOperator(
           mergeOperatorHandle));
 }
 
+void Java_org_rocksdb_Options_setPrefixExtractor(
+    JNIEnv*, jobject, jlong jhandle, jlong prefixExtractorHandle) {
+  reinterpret_cast<ROCKSDB_NAMESPACE::Options*>(jhandle)->prefix_extractor =
+      *(reinterpret_cast<std::shared_ptr<ROCKSDB_NAMESPACE::SliceTransform>*>(
+          prefixExtractorHandle));
+}
+
 /*
  * Class:     org_rocksdb_Options
  * Method:    setCompactionFilterHandle

@@ -229,6 +229,13 @@ public class ColumnFamilyOptions extends RocksObject
   }
 
   @Override
+  public ColumnFamilyOptions setPrefixExtractor(
+    final SliceTransform sliceTransform) {
+    setPrefixExtractor(nativeHandle_, sliceTransform.nativeHandle_);
+    return this;
+  }
+
+  @Override
   public ColumnFamilyOptions setCompactionFilter(
         final AbstractCompactionFilter<? extends AbstractSlice<?>>
             compactionFilter) {
@@ -957,6 +964,7 @@ public class ColumnFamilyOptions extends RocksObject
       long comparatorHandle, byte comparatorType);
   private native void setMergeOperatorName(long handle, String name);
   private native void setMergeOperator(long handle, long mergeOperatorHandle);
+  private native void setPrefixExtractor(long handle, long sliceTransformHandle);
   private native void setCompactionFilterHandle(long handle,
       long compactionFilterHandle);
   private native void setCompactionFilterFactoryHandle(long handle,
