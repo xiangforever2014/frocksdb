@@ -248,6 +248,12 @@ public class Options extends RocksObject
   }
 
   @Override
+    public Options setPrefixExtractor(final SliceTransform sliceTransform) {
+      setPrefixExtractor(nativeHandle_, sliceTransform.nativeHandle_);
+      return this;
+    }
+
+  @Override
   public Options setCompactionFilter(
           final AbstractCompactionFilter<? extends AbstractSlice<?>>
                   compactionFilter) {
@@ -2261,6 +2267,8 @@ public class Options extends RocksObject
       long handle, String name);
   private native void setMergeOperator(
       long handle, long mergeOperatorHandle);
+  private native void setPrefixExtractor(
+      long nativeHandle_, long sliceTransformHandle_);
   private native void setCompactionFilterHandle(
           long handle, long compactionFilterHandle);
   private native void setCompactionFilterFactoryHandle(
